@@ -1,0 +1,6 @@
+app:
+	build: ./
+	volumes:
+	  - ./app:/app
+	tty: true
+	container_name: bharrold_lemipc

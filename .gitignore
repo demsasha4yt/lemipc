@@ -1,0 +1,8 @@
+
+*.o
+lemipc
+.vscode
+*.dSYM
+Contents
+*.a
+obj
