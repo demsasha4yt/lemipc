@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemipc_msg.h                                       :+:      :+:    :+:   */
+/*   lemipc_player.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 20:00:39 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/22 15:28:21 by bharrold         ###   ########.fr       */
+/*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
+/*   Updated: 2020/11/22 17:58:35 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIPC_MSG_H
-# define LEMIPC_MSG_H
+#ifndef LEMIPC_PLAYER_H
+# define LEMIPC_PLAYER_H
 
-# include <sys/types.h>
-# include <stdlib.h>
-# include <stdint.h>
+#include <sys/sem.h>
 
-# define MAX_MSG_SIZE 200
-
-typedef struct	s_msgbuf
+/*
+** t_player struct
+*/
+typedef struct	s_player
 {
-	long		mtype;
-	char		mtext[MAX_MSG_SIZE];
-}				t_msgbuf;
+	key_t		key;
+	int			shm_id;
+	int			sem_id;
+	int			msg_id;
+	int			isfirst;
+	int			alive;
+	int			active;
+	int			x;
+	int			y;
+	int			team_nb;
+}				t_player;
 
 #endif

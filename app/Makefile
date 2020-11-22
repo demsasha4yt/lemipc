@@ -1,6 +1,6 @@
 NAME = lemipc
 
-SRC = main.c sem.c shm.c msgq.c
+SRC = main.c sem.c shm.c msgq.c mainloop.c
 CC = gcc
 
 SRCDIR = src
@@ -18,7 +18,7 @@ INCLUDES = -Iincludes/
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	@${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJ} -O2 -lrt -pthread
+	@${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJ} -lpthread
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
 	@/bin/mkdir -p ${OBJDIR}
