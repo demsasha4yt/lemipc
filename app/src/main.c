@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/21 20:26:14 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/21 23:28:01 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,23 @@ int main (int argc, char **argv)
 		sprintf(msg.mtext, "%d", getpid());
 		if (argc > 1)
 		{
+			int qids = msgget(key, 0666 | IPC_CREAT);
+
 			if (msgrcv(qid, &msgr, sizeof(msgr), 0, 0) == -1) {
 				perror ("msgrcv");
 				exit (1);
 			}
-			printf("pid %d, message rcvd from %s\n", getpid(), msgr.mtext);
+			printf("pid %d, msq = %d, message rcvd from %s\n", getpid(),qids, msgr.mtext);
 		} else
 		{
-			if (msgsnd(qid, &msg, sizeof(msg), 0) == -1) {
+			msg.mtype = 1;
+			if (msgsnd(qid, &msg, sizeof(msg) - sizeof(long), 0) == -1) {
 				perror ("msgget");
 				exit (1);
 			}
 				printf("pid %d, message send from %s\n", getpid(), msg.mtext);
 		}
-		sleep(10);
+		sleep(2);
 	}
 	unlink_sem(SEM_NAME);
 	unlink_shm(SHM_NAME);
