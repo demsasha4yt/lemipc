@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:57:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/22 20:32:35 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/28 18:29:32 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ struct sembuf	getsem_op(int sem_num, int op_value)
 
 int			islocked(int sem_id)
 {
-	int	value;
-	sem_getvalue(sem_id, &value);
-	return (value);
+	(void)sem_id;
+	return (0);
 }
 
 void		lock(int sem_id)

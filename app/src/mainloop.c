@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/22 20:37:46 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/28 18:30:20 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	tick(t_player *player, int *map)
 	(void)map;
 	if (islocked(player->sem_id))
 		return (0);
+	printf("pid %d: tick.\n", getpid());
 	lock(player->sem_id);
 	unlock(player->sem_id);
 	return (0);

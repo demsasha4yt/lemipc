@@ -6,13 +6,23 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/22 20:15:31 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/28 18:37:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 #include "lemipc_player.h"
 #include <string.h>
+
+/*
+** usage prints usage to the screen and returns EXIT_FAILURE CODE
+*/
+static int usage()
+{
+	printf("Usage: ./lemipc (number of the team)\n");
+	return (EXIT_FAILURE);
+}
+
 /*
 ** lemipc_init inits game
 */
@@ -20,6 +30,8 @@ static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
 {
 	player->key = ftok(argv[1], 0);
 	player->alive = 0;
+	if (argv[1][0] < '0' || argv[1][0] > '9')
+		return (usage());
 	player->team_nb = atoi(argv[1]);
 	player->isfirst = 0;
 	connect_shm(player, (void**)map, MAP_W * MAP_H * sizeof(int));
@@ -31,12 +43,6 @@ static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
 	printf("%d\n%d\n%d\n%d\n", player->shm_id, player->sem_id, player->msg_id, player->isfirst);
 	(void)argc;
 	return (0);
-}
-
-static int usage()
-{
-	printf("Usage: ./lemipc team\n");
-	return (EXIT_FAILURE);
 }
 
 void	sigint(int sig)
