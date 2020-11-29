@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/22 20:32:56 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/29 18:39:29 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@
 
 # include "lemipc_player.h"
 
+# define HOST_KEY_PATHNAME "/tmp/lemipc_server_key"
 # define SHM_NAME "/tmp/lemi23234234pc"
 # define SEM_NAME SHM_NAME
 # define MAP_SIZE 30
 # define MAP_W 30
 # define MAP_H 30
 
+
+# define WAIT_U_TIME_DEFAULT 100000
+# define WAIT_U_TIME 1000000
 t_player	g_player;
 
 /*
@@ -107,7 +111,5 @@ void		destroy_msgq();
 ** get_msgq_qid ...
 */
 int			get_msgq_qid(key_t key);
-
-
 
 #endif

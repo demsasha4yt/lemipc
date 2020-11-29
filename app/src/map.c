@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemipc_player.h                                    :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/29 19:33:41 by bharrold         ###   ########.fr       */
+/*   Created: 2020/11/29 15:07:46 by bharrold          #+#    #+#             */
+/*   Updated: 2020/11/29 17:56:24 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIPC_PLAYER_H
-# define LEMIPC_PLAYER_H
+#include "lemipc.h"
 
-# include <sys/sem.h>
-
-# define PLAYER_FTOK_LEN 20
-
-/*
-** t_player struct
-*/
-typedef struct	s_player
+int		placeonmap(t_player *player, int **map)
 {
-	char		player_key_host[PLAYER_FTOK_LEN];
-	key_t		key;
-	key_t		msg_key;
-	int			shm_id;
-	int			sem_id;
-	int			msg_id;
-	int			msgh_id;
-	int			isfirst;
-	int			alive;
-	int			active;
-	int			x;
-	int			y;
-	int			team_nb;
-}				t_player;
-
-#endif
+	
+}

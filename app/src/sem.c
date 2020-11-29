@@ -6,31 +6,42 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:57:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/28 18:29:32 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/29 18:27:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 #include "lemipc_player.h"
+#include "lemipc_semun.h"
+
+/*
+**	struct sembuf p = { 0, -1, SEM_UNDO}; // semwait
+**	struct sembuf v = { 0, +1, SEM_UNDO}; // semsignal
+*/
 
 int	connect_sem(t_player *player)
 {
+	union semun		u;
+	
 	player->sem_id = semget(player->key, 1, 0664);
 	if (player->sem_id < 0)
 		player->sem_id = semget(player->key, 1, IPC_CREAT | 0664);
 	if (player->sem_id < 0)
 		perror("semget");
+	u.val = 1;
+	if (player->sem_id < 0 || semctl(player->sem_id, 0, SETVAL, u) < 0)
+		return (-1);
 	return (player->sem_id);
 }
 
-struct sembuf	getsem_op(int sem_num, int op_value)
+struct sembuf	getsembuf(int sem_num, int op_value)
 {
-	struct sembuf sops;
+	struct sembuf	s;
 
-	sops.sem_num = sem_num;
-	sops.sem_op = op_value;
-	sops.sem_flg = 0;
-	return (sops);
+	s.sem_num = sem_num;
+	s.sem_op = op_value;
+	s.sem_flg = SEM_UNDO;
+	return (s);
 }
 
 int			islocked(int sem_id)
@@ -41,16 +52,22 @@ int			islocked(int sem_id)
 
 void		lock(int sem_id)
 {
-	struct sembuf sops;
+	struct sembuf	s;
+	int				ret;
 
-	sops = getsem_op(0, -1);
-	semop(sem_id, &sops, 1);
+	s = getsembuf(0, -1);
+	ret = semop(sem_id, &s, 1);
+	if (ret < 0)
+		exit(13);
 }
 
 void		unlock(int sem_id)
 {
-	struct sembuf sops;
+	struct sembuf	s;
+	int				ret;
 
-	sops = getsem_op(0, 1);
-	semop(sem_id, &sops, 1);
+	s = getsembuf(0, +1);
+	ret = semop(sem_id, &s, 1);
+	if (ret < 0)
+		exit(13);
 }

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/28 18:30:20 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/11/29 19:37:08 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static int	tick(t_player *player, int *map)
 {
-	(void)player;
-	(void)map;
-	if (islocked(player->sem_id))
-		return (0);
-	printf("pid %d: tick.\n", getpid());
 	lock(player->sem_id);
+	printf("pid %d: tick. is_first = %d, msgid = %d, msghid = %d\n", getpid(),
+		player->isfirst, player->msg_id, player->msgh_id);
+	fflush(0);
+	usleep(WAIT_U_TIME);
 	unlock(player->sem_id);
+	(void)map;
 	return (0);
 }
 
 int			mainloop(t_player *player, int *map)
 {
 	while (!tick(player, map))
-		usleep(100000);
+		usleep(WAIT_U_TIME);
 	if (player->isfirst)
 	{
 		if (shmctl(g_player.shm_id, IPC_RMID, NULL) == -1)
