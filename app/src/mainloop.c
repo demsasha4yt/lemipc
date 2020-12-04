@@ -32,10 +32,10 @@ int			mainloop(t_player *player, int *map)
 	{
 		if (shmctl(g_player.shm_id, IPC_RMID, NULL) == -1)
 			perror("shmctl");
-		if (msgctl(g_player.msg_id, IPC_RMID, NULL) == -1)
-			perror("msgctl");
 		if (semctl(g_player.sem_id, 1, IPC_RMID) == -1)
 			perror("semctl");
 	}
+	if (msgctl(g_player.msg_id, IPC_RMID, NULL) == -1)
+			perror("msgctl");
 	return (0);
 }

@@ -27,8 +27,8 @@ static void	gen_ftok_path(t_player *player)
 {
 	char touch_str[PLAYER_FTOK_LEN + 6];
 
-	snprintf (player->player_key_host, PLAYER_FTOK_LEN, "/tmp/%d", getpid());
-	snprintf (touch_str, PLAYER_FTOK_LEN + 6, "touch /tmp/%d", getpid());
+	snprintf(player->player_key_host, PLAYER_FTOK_LEN, "/tmp/%d", getpid());
+	snprintf(touch_str, PLAYER_FTOK_LEN + 6, "touch /tmp/%d", getpid());
 	system("touch /tmp/lemipc_server_key");
 	system(touch_str);
 }
@@ -59,8 +59,6 @@ static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
 
 void	sigint(int sig)
 {
-	printf("sigint\n");
-	printf("destroy %d\n", g_player.shm_id);
 	if (shmctl(g_player.shm_id, IPC_RMID, NULL) == -1)
 		perror("shmctl");
 	if (msgctl(g_player.msg_id, IPC_RMID, NULL) == -1)
