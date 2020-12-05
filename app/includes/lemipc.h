@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:41:26 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:55:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,16 @@ int			recv_msgq(t_player *player, t_msgbuf *dest);
 */
 int			mainloop(t_player *player, int *map);
 
+/*
+** clear clears all data and destroys sem, shm, msgq on sigint
+*/
+void		clear(t_player *player);
+
+/*
+** clearone destroys msgq when player is killed
+** execute clear(player) in case of player is first
+*/
+void		clearone(t_player *player);
 /*
 ** [PROTO] **********************
 */

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 17:45:37 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:52:38 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,7 @@ static int	lemipc_init(char **argv, t_player *player, int **map)
 
 void		sigint(int sig)
 {
-	if (shmctl(g_player.shm_id, IPC_RMID, NULL) == -1)
-		perror("shmctl");
-	if (!g_player.isfirst)
-	{
-		if (msgctl(g_player.msg_id, IPC_RMID, NULL) == -1)
-			perror("msgctl");
-	}
-	if (msgctl(g_player.msgh_id, IPC_RMID, NULL) == -1)
-		perror("msgctl");
-	if (semctl(g_player.sem_id, 1, IPC_RMID) == -1)
-		perror("semctl");
-	if (g_player.isfirst && g_player.players != NULL)
-		free(g_player.players);
-	write(0, "\n", 1);
-	fflush(0);
+	clear(&g_player);
 	exit(SIGINT);
 	(void)sig;
 }

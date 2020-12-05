@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:41:20 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:54:25 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,6 @@ int							mainloop(t_player *player, int *map)
 {
 	while (!tick(player, map))
 		usleep(getsleeptime(player));
-	if (player->isfirst)
-	{
-		if (shmctl(g_player.shm_id, IPC_RMID, NULL) == -1)
-			perror("shmctl");
-		if (semctl(g_player.sem_id, 1, IPC_RMID) == -1)
-			perror("semctl");
-	}
-	if (msgctl(g_player.msg_id, IPC_RMID, NULL) == -1)
-			perror("msgctl");
+	clearone(player);
 	return (0);
 }

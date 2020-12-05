@@ -1,6 +1,6 @@
 NAME = lemipc
 
-SRC = main.c sem.c shm.c msgq.c mainloop.c map.c proto.c proto_handle.c \
+SRC = main.c sem.c shm.c msgq.c mainloop.c map.c proto.c proto_handle.c clear.c\
 	handler_done.c handler_enter.c handler_exit.c handler_kick.c handler_no.c \
 	handler_req.c handler_yes.c
 	
