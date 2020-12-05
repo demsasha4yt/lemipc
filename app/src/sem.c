@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:57:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/29 18:27:56 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 15:56:30 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	connect_sem(t_player *player)
 {
-	union semun		u;
+	union u_semun		u;
 	
 	player->sem_id = semget(player->key, 1, 0664);
 	if (player->sem_id < 0)

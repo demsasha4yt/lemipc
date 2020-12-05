@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   handler_done.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/29 15:07:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 14:43:24 by bharrold         ###   ########.fr       */
+/*   Created: 2020/12/05 16:17:13 by bharrold          #+#    #+#             */
+/*   Updated: 2020/12/05 16:19:20 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 
-int		placeonmap(t_player *player, int **map)
+int		handler_done(t_player *player, t_msgbuf *buf)
 {
 	(void)player;
-	(void)map;
+	(void)buf;
 	return (0);
 }

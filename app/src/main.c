@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/29 19:35:54 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:33:14 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /*
 ** usage prints usage to the screen and returns EXIT_FAILURE CODE
 */
-static int usage()
+static int	usage()
 {
 	printf("Usage: ./lemipc (number of the team)\n");
 	return (EXIT_FAILURE);
@@ -36,9 +36,8 @@ static void	gen_ftok_path(t_player *player)
 /*
 ** lemipc_init inits game
 */
-static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
+static int	lemipc_init(char **argv, t_player *player, int **map)
 {
-	
 	gen_ftok_path(player);
 	player->key = ftok(HOST_KEY_PATHNAME, 0);
 	player->alive = 0;
@@ -46,6 +45,7 @@ static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
 		return (usage());
 	player->team_nb = atoi(argv[1]);
 	player->isfirst = 0;
+	player->state = STATE_NOENTER;
 	connect_shm(player, (void**)map, MAP_W * MAP_H * sizeof(int));
 	connect_sem(player);
 	player->msg_key = (player->isfirst) ? player->key :
@@ -53,7 +53,8 @@ static int	lemipc_init(int argc, char **argv, t_player *player, int **map)
 	connect_msgq(player);
 	if ((*map = shmat(player->shm_id, NULL, 0)) == (void *)-1)
 		return (1);
-	(void)argc;
+	player->map = *map;
+	proto_init_handlers(player);
 	return (0);
 }
 
@@ -71,14 +72,14 @@ void	sigint(int sig)
 	(void)sig;
 }
 
-int main (int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int			*map;
 
 	if (argc != 2)
 		exit(usage());
 	srand(time(NULL));
-	if(lemipc_init(argc, argv, &g_player, &map))
+	if(lemipc_init(argv, &g_player, &map))
 		exit(EXIT_FAILURE);
 	signal(SIGINT, sigint);
 	mainloop(&g_player, map);

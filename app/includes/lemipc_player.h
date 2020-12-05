@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/11/29 19:33:41 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:22:57 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 # include <sys/sem.h>
 
-# define PLAYER_FTOK_LEN 20
+# include "lemipc_msg.h"
+# include "lemipc_proto.h"
+
+# define PLAYER_FTOK_LEN	20
+
+# define STATE_NOENTER		1
+# define STATE_REQENTER		2
+# define STATE_WAIT			3
+# define STATE_STEP			4
 
 /*
 ** t_player struct
@@ -30,11 +38,15 @@ typedef struct	s_player
 	int			msg_id;
 	int			msgh_id;
 	int			isfirst;
+	int			state;
 	int			alive;
 	int			active;
 	int			x;
 	int			y;
 	int			team_nb;
+	int			*map;
+	int			(*handlers[HANDLERS_CNT + 1])(struct s_player *p, t_msgbuf *b);
 }				t_player;
+
 
 #endif
