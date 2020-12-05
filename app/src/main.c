@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:52:38 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:16:03 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ static int	lemipc_init(char **argv, t_player *player, int **map)
 void		sigint(int sig)
 {
 	clear(&g_player);
-	exit(SIGINT);
-	(void)sig;
+	exit(sig);
 }
 
 int			main(int argc, char **argv)
@@ -75,6 +74,8 @@ int			main(int argc, char **argv)
 	if (lemipc_init(argv, &g_player, &map))
 		exit(EXIT_FAILURE);
 	signal(SIGINT, sigint);
+	signal(SIGKILL, sigint);
+	signal(SIGTERM, sigint);
 	mainloop(&g_player, map);
 	return (EXIT_SUCCESS);
 }
