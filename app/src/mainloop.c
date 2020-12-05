@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:58:31 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:03:01 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static inline useconds_t	getsleeptime(t_player *player)
 {
+	int	cnt;
+
 	if (player->isfirst)
-		return (WAIT_U_TIME / player->players_cnt);
-	else
-		return (WAIT_U_TIME);
+	{
+		cnt = player->players_cnt;
+		if (!cnt)
+			cnt = 1;
+		return (WAIT_U_TIME / cnt);
+	}
+	return (WAIT_U_TIME);
 }
 
 static int					step(t_player *player, int *map)
