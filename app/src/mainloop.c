@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:54:25 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:58:31 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static inline useconds_t	getsleeptime(t_player *player)
 {
 	if (player->isfirst)
-		return (WAIT_U_TIME_HOST);
+		return (WAIT_U_TIME / player->players_cnt);
 	else
 		return (WAIT_U_TIME);
 }
