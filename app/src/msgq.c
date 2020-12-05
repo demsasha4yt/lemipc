@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 17:46:26 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 15:50:42 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 17:42:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int			connect_msgq(t_player *player)
 
 int			recv_msgq(t_player *player, t_msgbuf *dest)
 {
-	if (DEBUG)
-		printf("recv_msgq\n");
 	if (msgrcv(player->msg_id, dest, sizeof (t_msgbuf), 0, 0) == -1)
 	{
 		perror("msgrcv");

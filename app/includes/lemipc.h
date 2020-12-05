@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 16:29:09 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:41:26 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include "lemipc_msg.h"
 # include "lemipc_proto.h"
 
-# define DEBUG					1
+# define DEBUG					0
 
 # define HOST_KEY_PATHNAME		"/tmp/lemipc_server_key"
 # define MAP_SIZE				30
@@ -77,24 +77,20 @@ sem_t		*open_sem(const char *sem_name);
 int			unlink_sem(const char *sem_name);
 
 /*
-** connect_sem ...
+** connect_sem creates or connect semaphore
 */
 int			connect_sem(t_player *player);
 
 /*
-** lock ...
+** lock locks shm by semaphore
 */
 void		lock(int sem_id);
 
 /*
-** unlock ...
+** unlock unlocks shm by semaphore
 */
 void		unlock(int sem_id);
 
-/*
-** islocked ...
-*/
-int			islocked(int sem_id);
 /*
 ** connect_msgq tries to create or connect to msgq.
 */
@@ -145,6 +141,11 @@ void		proto_init_handlers(t_player *player);
 ** in case of error returns -1, otherwise - 0
 */
 int			proto_request_enter(t_player *player);
+
+/*
+** proto_request_step ...
+*/
+int			proto_request_step(t_player *player);
 
 /*
 ** proto_recv_msg ...
@@ -199,6 +200,5 @@ int		handler_req(t_player *player, t_msgbuf *buf);
 ** handler_yes ...
 */
 int		handler_yes(t_player *player, t_msgbuf *buf);
-
 
 #endif

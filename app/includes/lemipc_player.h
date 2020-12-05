@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 16:22:57 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:22:12 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # define STATE_NOENTER		1
 # define STATE_REQENTER		2
 # define STATE_WAIT			3
-# define STATE_STEP			4
+# define STATE_RESPWAIT		4
+# define STATE_STEP			5
 
 /*
 ** t_player struct
@@ -40,13 +41,15 @@ typedef struct	s_player
 	int			isfirst;
 	int			state;
 	int			alive;
-	int			active;
+	int			onmap;
 	int			x;
 	int			y;
 	int			team_nb;
 	int			*map;
 	int			(*handlers[HANDLERS_CNT + 1])(struct s_player *p, t_msgbuf *b);
+	int			*players;
+	int			players_cnt;
+	int			cur_player;
 }				t_player;
-
 
 #endif

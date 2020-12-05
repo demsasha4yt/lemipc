@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 14:41:28 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 16:30:06 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:04:48 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int		proto_request_enter(t_player *player)
 	if (proto_send_msg(player, player->msgh_id, PROTO_ENTER, NULL) < 0)
 		return (-1);
 	player->state = STATE_REQENTER;
+	return (0);
+}
+
+int		proto_request_step(t_player *player)
+{
+	if (player->state != STATE_WAIT)
+		return (0);
+	if (proto_send_msg(player, player->msgh_id, PROTO_REQ, NULL))
+		return (-1);
+	player->state = STATE_RESPWAIT;
 	return (0);
 }
 
