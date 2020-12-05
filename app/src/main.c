@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 19:16:03 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:34:55 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	lemipc_init(char **argv, t_player *player, int **map)
 	connect_msgq(player);
 	if ((*map = shmat(player->shm_id, NULL, 0)) == (void *)-1)
 		return (1);
-	player->map = *map;
 	proto_init_handlers(player);
 	if (player->isfirst)
 		player->players = (int*)malloc(sizeof(int) * MAP_W * MAP_H);

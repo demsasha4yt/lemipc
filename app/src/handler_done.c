@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 16:17:13 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:37:38 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:32:27 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		handler_done(t_player *player, t_msgbuf *buf)
 		player->cur_player = 0;
 	else 
 		player->cur_player += 1;
+	render(player);
 	return (0);
 }

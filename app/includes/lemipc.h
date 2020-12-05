@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:55:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:31:43 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@
 # include "lemipc_msg.h"
 # include "lemipc_proto.h"
 
-# define DEBUG					0
+# define DEBUG					1
+# define PRINT_MAP				0
 
 # define HOST_KEY_PATHNAME		"/tmp/lemipc_server_key"
 # define MAP_SIZE				30
 # define MAP_W					30
 # define MAP_H					30
 
-# define WAIT_U_TIME_DEFAULT	100000
-# define WAIT_U_TIME			1000000
-# define WAIT_U_TIME_HOST		WAIT_U_TIME_DEFAULT / 10
+# define WAIT_U_TIME_DEFAULT	1000000
+# define WAIT_U_TIME			WAIT_U_TIME_DEFAULT
 
 t_player	g_player;
 
@@ -126,6 +126,18 @@ int			recv_msgq(t_player *player, t_msgbuf *dest);
 ** mainloop starts the application
 */
 int			mainloop(t_player *player, int *map);
+
+/*
+** placeonmap puts player on map in random empty place
+** returns -1 in case there is no place or error
+** returns 0 on success
+*/
+int			placeonmap(t_player *player, int **map);
+
+/*
+** render prints map to the screen
+*/
+void		render(t_player *player);
 
 /*
 ** clear clears all data and destroys sem, shm, msgq on sigint

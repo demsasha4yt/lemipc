@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:22:12 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:34:49 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define STATE_WAIT			3
 # define STATE_RESPWAIT		4
 # define STATE_STEP			5
-
+# define STATE_KICKED		6
 /*
 ** t_player struct
 */
@@ -45,7 +45,6 @@ typedef struct	s_player
 	int			x;
 	int			y;
 	int			team_nb;
-	int			*map;
 	int			(*handlers[HANDLERS_CNT + 1])(struct s_player *p, t_msgbuf *b);
 	int			*players;
 	int			players_cnt;

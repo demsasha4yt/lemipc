@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 16:16:05 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 16:19:28 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:19:06 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int		handler_kick(t_player *player, t_msgbuf *buf)
 {
-	(void)player;
+	if (!player->onmap)
+		return (-1);
+	player->state = STATE_KICKED;
 	(void)buf;
 	return (0);
 }
