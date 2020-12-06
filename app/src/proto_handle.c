@@ -32,9 +32,14 @@ int		proto_handle(t_player *player, int proto, t_msgbuf *msg)
 		dprintf(2, "player and msg required\n");
 		return (-1);
 	}
-	if (!player->handlers || proto < 0 || proto > HANDLERS_CNT)
+	if (proto < 0 || proto > HANDLERS_CNT)
 	{
 		dprintf(2, "PID %d: proto number %d does not exist\n", getpid(), proto);
+		return (-1);
+	}
+	if (player->handlers[proto] == NULL)
+	{
+		dprintf(2, "PID %d: proto number %d does not exists\n", getpid(), proto);
 		return (-1);
 	}
 	return (player->handlers[proto](player, msg));
