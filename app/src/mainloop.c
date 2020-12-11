@@ -61,8 +61,7 @@ static int					tick(t_player *player, int *map)
 		return (-1);
 	if (proto_recv_msg(player) < 0)
 		return (-1);
-	step(player, map);
-	return (0);
+	return (step(player, map));
 }
 
 int							mainloop(t_player *player, int *map)
