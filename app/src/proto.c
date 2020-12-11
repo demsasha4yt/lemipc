@@ -32,6 +32,28 @@ int		proto_request_step(t_player *player)
 	return (0);
 }
 
+int			proto_kick(t_player *player, int kicked_pid)
+{
+	key_t		kicked_ftok;
+	int			kicked_msgid;
+	char		key_path[PLAYER_FTOK_LEN];
+	t_msgbuf	buf;
+
+	if (!player->isfirst)
+		return (0);
+	snprintf(key_path, PLAYER_FTOK_LEN, "/tmp/%d", kicked_pid);
+	kicked_ftok = ftok(key_path, 0);
+	kicked_msgid = msgget(player->msg_key, 0664);
+	if (DEBUG)
+		printf("PID %d: kick %d (msg_id = %d)\n",
+			getpid(), kicked_pid, kicked_msgid);
+	if (proto_send_msg(player, kicked_msgid, PROTO_KICK, NULL) < 0)
+		return (-1);
+	buf.msg_text.pid = kicked_pid;
+	buf.msg_text.qid = kicked_msgid;
+	return (handler_exit(player, &buf));
+}
+
 int			proto_send_msg(t_player *player, int dest, int proto, t_payload *payload)
 {
 	t_msgbuf	message;

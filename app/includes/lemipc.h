@@ -180,6 +180,11 @@ int			proto_recv_msg(t_player *player);
 int			proto_send_msg(t_player *player, int dest, int proto, t_payload *payload);
 
 /*
+** proto_kick kicks player from game...
+*/
+int			proto_kick(t_player *player, int kicked_pid);
+
+/*
 ** proto_handle ...
 */
 int			proto_handle(t_player *player, int proto, t_msgbuf *msg);

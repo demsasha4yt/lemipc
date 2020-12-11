@@ -34,7 +34,6 @@ static int					state_kicked(t_player *player, int *map)
 	return (-1);
 }
 
-
 static int					step(t_player *player, int *map)
 {
 	if (player->state != STATE_STEP && player->state != STATE_KICKED)
