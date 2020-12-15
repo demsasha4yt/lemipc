@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mainloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:07:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 19:34:27 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:23:06 by avdementev       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,24 @@ static inline useconds_t	getsleeptime(t_player *player)
 	return (WAIT_U_TIME);
 }
 
-static int					state_kicked(t_player *player, int *map)
-{
-	(void)player;
-	(void)map;
-	// TODO: handle clear player on map
-	return (-1);
-}
-
 static int					step(t_player *player, int *map)
 {
+	int			step_ret;
+	t_payload	payload;
+
 	if (player->state != STATE_STEP && player->state != STATE_KICKED)
 		return (0);
 	lock(player->sem_id);
-	if (player->state == STATE_KICKED)
-		return (state_kicked(player, map));
-	printf("pid %d: tick. is_first = %d, msgid = %d, msghid = %d,\
-	state = %d\n", getpid(), player->isfirst, player->msg_id, player->msgh_id,
-	player->state);
-	fflush(0);
-	player->state = STATE_WAIT;
-	proto_send_msg(player, player->msgh_id, PROTO_DONE, NULL);
+	step_ret = handle_step(player, map);
+	if (step_ret == 0)
+		proto_send_msg(player, player->msgh_id, PROTO_DONE, NULL);
+	payload.x = player->x;
+	payload.y = player->y;
+	if (step_ret < 0)
+		proto_send_msg(player, player->msgh_id, PROTO_EXIT, &payload);
 	usleep(getsleeptime(player));
 	unlock(player->sem_id);
-	return (0);
+	return (step_ret);
 }
 
 static int					tick(t_player *player, int *map)

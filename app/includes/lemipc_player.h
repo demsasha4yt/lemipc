@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemipc_player.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 17:07:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 19:34:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:27:37 by avdementev       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_player
 	int			*players;
 	int			players_cnt;
 	int			cur_player;
+	int			*map;
 }				t_player;
 
 #endif

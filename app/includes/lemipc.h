@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemipc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 19:31:43 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/15 17:37:06 by avdementev       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@
 # include "lemipc_proto.h"
 
 # define DEBUG					1
-# define PRINT_MAP				0
+# define PRINT_MAP				1
 
 # define HOST_KEY_PATHNAME		"/tmp/lemipc_server_key"
 # define MAP_SIZE				30
-# define MAP_W					30
-# define MAP_H					30
+# define MAP_W					5
+# define MAP_H					10
 
 # define WAIT_U_TIME_DEFAULT	1000000
 # define WAIT_U_TIME			WAIT_U_TIME_DEFAULT
@@ -135,9 +135,27 @@ int			mainloop(t_player *player, int *map);
 int			placeonmap(t_player *player, int **map);
 
 /*
+** mapidx returns an array index in map by x,y coords.
+*/
+int			mapidx(int x, int y);
+
+/*
+** changepos changes player pos on map and writes it to player->x, player->y
+** returns -1 of there is an error, otherwise 0
+*/
+int			changepos(t_player *player, int **map, int new_x, int new_y);
+
+/*
+** handle_step handles main logic of the step for each player
+** returns -1 in case of error or player must exit from the game
+** return 0 on success
+*/
+int			handle_step(t_player *player, int *map);
+
+/*
 ** render prints map to the screen
 */
-void		render(t_player *player);
+void		render(t_player *player, int *map);
 
 /*
 ** clear clears all data and destroys sem, shm, msgq on sigint

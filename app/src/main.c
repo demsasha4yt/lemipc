@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 23:03:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 19:34:55 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:29:33 by avdementev       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int			main(int argc, char **argv)
 	signal(SIGINT, sigint);
 	signal(SIGKILL, sigint);
 	signal(SIGTERM, sigint);
+	g_player.map = map;
 	mainloop(&g_player, map);
 	return (EXIT_SUCCESS);
 }
