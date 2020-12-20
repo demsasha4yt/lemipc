@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:48:04 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/20 18:56:12 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/20 18:57:48 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lemipc.h"
 #include "lemipc_ai.h"
 
-int		compare_diffs(const void *a, const void *b)
+static int		compare_diffs(const void *a, const void *b)
 {
 	t_diffs	*arg1;
 	t_diffs	*arg2;
