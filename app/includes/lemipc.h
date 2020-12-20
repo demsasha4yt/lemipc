@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/20 16:25:30 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/20 18:34:25 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,16 @@ int			placeonmap(t_player *player, int **map);
 int			mapidx(int x, int y);
 
 /*
+** mapxy gets x, y coords by array index
+*/
+int			mapxy(int idx, int map_w, int *x, int *y);
+
+/*
+** diffidxs count steps from idx to idx2
+*/
+int			diffidxs(int map_w, int idx, int idx2);
+
+/*
 ** changepos changes player pos on map and writes it to player->x, player->y
 ** returns -1 of there is an error, otherwise 0
 */
@@ -174,6 +184,7 @@ void		clearone(t_player *player);
 ** returns 0 on success, -1 on error
 */
 int			ai_next(int *map, int *x, int *y);
+
 /*
 ** [PROTO] **********************
 */

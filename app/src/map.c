@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 15:07:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/15 17:59:04 by avdementev       ###   ########.fr       */
+/*   Updated: 2020/12/20 18:20:24 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int		placeonmap(t_player *player, int **map)
 	if (random < 0 || free[random] < 0)
 		return (-1);
 	(*map)[free[random]] = player->team_nb;
-	player->x = free[random] % MAP_W;
-	player->y = free[random] / MAP_W;
+	mapxy(free[random], MAP_W, &player->x, &player->y);
 	return (0);
 }
 
@@ -57,8 +56,23 @@ int		changepos(t_player *player, int **map, int new_x, int new_y)
 	const int	old_idx = mapidx(player->x, player->y);
 	const int	new_idx = mapidx(new_x, new_y);
 
-	if ((*map)[new_idx] != 0 || (*map)[old_idx] == 0)
+	if (DEBUG)
+		printf("PID %d: changepos to (from %d to %d)\n", getpid(),
+			old_idx, new_idx);
+	return (0); // TODO: REMOVE IT LATER
+	if (new_idx < 0 || old_idx < 0 || new_idx > MAP_W * MAP_H ||
+		old_idx > MAP_W * MAP_H)
+	{
+		if (DEBUG)
+			printf("PID %d: changepos failed by idx\n", getpid());
 		return (-1);
+	}
+	if ((*map)[new_idx] != 0 || (*map)[old_idx] == 0)
+	{
+		if (DEBUG)
+			printf("PID %d: changepos failed by anticheat\n", getpid());
+		return (-1);
+	}
 	return (0);
 }
 
