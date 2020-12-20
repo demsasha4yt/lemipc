@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/05 14:41:28 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/05 18:04:48 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/20 16:28:51 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			proto_kick(t_player *player, int kicked_pid)
 		return (0);
 	snprintf(key_path, PLAYER_FTOK_LEN, "/tmp/%d", kicked_pid);
 	kicked_ftok = ftok(key_path, 0);
-	kicked_msgid = msgget(player->msg_key, 0664);
+	kicked_msgid = msgget(kicked_ftok, 0664);
 	if (DEBUG)
 		printf("PID %d: kick %d (msg_id = %d)\n",
 			getpid(), kicked_pid, kicked_msgid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemipc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avdementev <avdementev@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 16:14:14 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/15 17:37:06 by avdementev       ###   ########.fr       */
+/*   Updated: 2020/12/20 16:25:30 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,13 @@ void		clear(t_player *player);
 ** execute clear(player) in case of player is first
 */
 void		clearone(t_player *player);
+
+/*
+** ai_next calculates new position for player and place it to *x and *y
+** pass &player->x and &player->y inside
+** returns 0 on success, -1 on error
+*/
+int			ai_next(int *map, int *x, int *y);
 /*
 ** [PROTO] **********************
 */
