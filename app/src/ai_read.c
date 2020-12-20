@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 16:48:04 by bharrold          #+#    #+#             */
-/*   Updated: 2020/12/20 18:51:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/12/20 18:56:12 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,5 @@ int		ai_get_srtd_ply_positions(int *map, int ply_idx, int map_size, int *result)
 		i++;
 	}
 	qsort(diffs, map_size, sizeof(t_diffs), compare_diffs);
-	if (conv_to_result(result, diffs, map_size) < 0)
-		return (-1);
-	return (0);
+	return (conv_to_result(result, diffs, map_size));
 }
